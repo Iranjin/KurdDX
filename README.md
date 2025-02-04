@@ -1,0 +1,2 @@
+# KurdDX
+ Discord: @iranjin
