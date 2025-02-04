@@ -1,0 +1,6 @@
+discord==2.3.2
+discord.py[voice]==2.3.2
+
+audioop-lts; python_version>='3.13'
+
+pillow==11.1.0
