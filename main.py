@@ -4,13 +4,13 @@ import os
 import discord
 
 from utils.config import Config
-from kurd_dx import KurdDX
 from utils.exceptions import *
+from kurd_dx import KurdDX
 
 
 def main():
-    logger = logging.getLogger("KurdDX")
-
+    logger = logging.getLogger("KurdDX.main")
+    
     config = Config("config.json")
     try:
         config.load()
