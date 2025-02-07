@@ -6,19 +6,20 @@ import discord
 from utils.config import Config
 from utils.exceptions import *
 from kurd_dx import KurdDX
+from constants import *
 
 
 def main():
     logger = logging.getLogger("KurdDX.main")
     
-    config = Config("config.json")
+    config = Config(CONFIG_FILE)
     try:
         config.load()
     except FileNotFoundError as e:
         logger.error("File '%s' not found!", e.filename)
         return
 
-    token_config = Config("token.json")
+    token_config = Config(TOKEN_FILE)
     try:
         token_config.load()
     except FileNotFoundError as e:
