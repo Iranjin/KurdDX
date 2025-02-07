@@ -7,7 +7,7 @@ from base_cog import BaseCog
 
 class Misc_EXT(BaseCog):
     @commands.hybrid_command(name="ping", description="Returns Pong!")
-    async def ping(self, ctx: commands.Context):
+    async def ping_command(self, ctx: commands.Context):
         raw_ping = self.bot.latency
         ping = round(raw_ping * 1000)
         await ctx.send(f"Pong! `{ping}`")
