@@ -1,6 +1,3 @@
-import logging
-import io
-
 from discord.ext import commands
 
 from utils.exceptions import *

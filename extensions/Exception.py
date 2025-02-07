@@ -1,4 +1,4 @@
-from typing import Union, overload
+from typing import Union
 
 import discord
 from discord.ext import commands
@@ -21,7 +21,7 @@ class Exception_EXT(BaseCog):
         if ctx.command is not None:
             ctx.command.reset_cooldown(ctx)
         
-        if isinstance(error, exceptions.KurdDXError): # NOTE: KurdDXError (util/exceptions.py)
+        if isinstance(error, exceptions.KurdDXError): # KurdDXError (util/exceptions.py)
             if isinstance(error.original, exceptions.ResourceNotFoundError):
                 return await self.on_resource_not_found_error(ctx, error.original)
             elif isinstance(error.original, exceptions.ExecutableNotFoundError):
@@ -33,7 +33,7 @@ class Exception_EXT(BaseCog):
             elif isinstance(error.original, exceptions.InvalidSubcommandError):
                 return await self.on_invalid_subcommand_error(ctx, error.original)
             
-        elif isinstance(error, commands.errors.HybridCommandError): # NOTE: HybridCommandError
+        elif isinstance(error, commands.errors.HybridCommandError): # HybridCommandError
             if isinstance(error.original, discord.app_commands.TransformerError):
                 return await self.on_transformer_error(ctx, error.original)
         
@@ -50,7 +50,7 @@ class Exception_EXT(BaseCog):
         elif isinstance(error, commands.errors.MissingRequiredAttachment):
             return await self.on_missing_required_attachment_error(ctx, error)
         elif isinstance(error, commands.CommandNotFound):
-            return # NOTE: Ignore
+            return # Ignore
 
         await self.on_unexpected_error(ctx, error)
         raise error
@@ -61,7 +61,7 @@ class Exception_EXT(BaseCog):
             description=str(error),
             color=discord.Color.teal()
         )
-        url, file = local_file.attach("res/error.png")
+        url, file = local_file.attach("res/images/error.png")
         embed.set_thumbnail(url=url)
         await self.reply(ctx, embed=embed, file=file)
     
@@ -80,7 +80,7 @@ class Exception_EXT(BaseCog):
             description=message,
             color=discord.Color.teal()
         )
-        url, file = local_file.attach("res/permission.png")
+        url, file = local_file.attach("res/images/permission.png")
         embed.set_thumbnail(url=url)
         await self.reply(ctx, embed=embed, file=file)
 
@@ -90,7 +90,7 @@ class Exception_EXT(BaseCog):
             description=str(error),
             color=discord.Color.teal()
         )
-        url, file = local_file.attach("res/error.png")
+        url, file = local_file.attach("res/images/error.png")
         embed.set_thumbnail(url=url)
         await self.reply(ctx, embed=embed, file=file)
 
@@ -100,7 +100,7 @@ class Exception_EXT(BaseCog):
             description=str(error),
             color=discord.Color.teal()
         )
-        url, file = local_file.attach("res/error.png")
+        url, file = local_file.attach("res/images/error.png")
         embed.set_thumbnail(url=url)
         await self.reply(ctx, embed=embed, file=file)
 
@@ -136,7 +136,7 @@ class Exception_EXT(BaseCog):
             description=str(error),
             color=discord.Color.teal()
         )
-        url, file = local_file.attach("res/error.png")
+        url, file = local_file.attach("res/images/error.png")
         embed.set_thumbnail(url=url)
         await self.reply(ctx, embed=embed, file=file)
     
@@ -150,7 +150,7 @@ class Exception_EXT(BaseCog):
             name="Usage",
             value=f"```{ctx.prefix}{ctx.command.name} {ctx.command.signature}```"
         )
-        url, file = local_file.attach("res/error.png")
+        url, file = local_file.attach("res/images/error.png")
         embed.set_thumbnail(url=url)
         await self.reply(ctx, embed=embed, file=file)
 
@@ -164,7 +164,7 @@ class Exception_EXT(BaseCog):
             name="Usage",
             value=f"```{ctx.prefix}{ctx.command.name} {ctx.command.signature}```"
         )
-        url, file = local_file.attach("res/error.png")
+        url, file = local_file.attach("res/images/error.png")
         embed.set_thumbnail(url=url)
         await self.reply(ctx, embed=embed, file=file)
     
@@ -176,7 +176,7 @@ class Exception_EXT(BaseCog):
         )
         view = discord.ui.View()
         view.add_item(discord.ui.Button(label="Report", style=discord.ButtonStyle.red, custom_id="button_report"))
-        url, file = local_file.attach("res/error.png")
+        url, file = local_file.attach("res/images/error.png")
         embed.set_thumbnail(url=url)
         await self.reply(ctx, embed=embed, file=file)
     
@@ -188,7 +188,7 @@ class Exception_EXT(BaseCog):
         )
         view = discord.ui.View()
         view.add_item(discord.ui.Button(label="Report", style=discord.ButtonStyle.red, custom_id="button_report"))
-        url, file = local_file.attach("res/error.png")
+        url, file = local_file.attach("res/images/error.png")
         embed.set_thumbnail(url=url)
         await self.reply(ctx, embed=embed, file=file)
     
@@ -198,7 +198,7 @@ class Exception_EXT(BaseCog):
             description=str(error),
             color=discord.Color.teal()
         )
-        url, file = local_file.attach("res/maintenance.png")
+        url, file = local_file.attach("res/images/maintenance.png")
         embed.set_thumbnail(url=url)
         await self.reply(ctx, embed=embed, file=file)
     
@@ -211,7 +211,7 @@ class Exception_EXT(BaseCog):
         embed.add_field(name="Value", value=f"```{error.value}```", inline=False)
         embed.add_field(name="Minimum Value", value=f"```{error.min_value}```", inline=False)
         embed.add_field(name="Maximum Value", value=f"```{error.max_value}```", inline=False)
-        url, file = local_file.attach("res/error.png")
+        url, file = local_file.attach("res/images/error.png")
         embed.set_thumbnail(url=url)
         await self.reply(ctx, embed=embed, file=file)
     
@@ -226,7 +226,7 @@ class Exception_EXT(BaseCog):
             description=description,
             color=discord.Color.teal()
         )
-        url, file = local_file.attach("res/error.png")
+        url, file = local_file.attach("res/images/error.png")
         embed.set_thumbnail(url=url)
         await self.reply(ctx, embed=embed, file=file)
     
@@ -253,12 +253,9 @@ class Exception_EXT(BaseCog):
         embed.add_field(name=name, value=f"```{error_string}```", inline=False)
         embed.add_field(name="Stack Trace", value=f"```{error_.__traceback__}```", inline=False)
 
-        url, file = local_file.attach("res/unexpected_error.png")
+        url, file = local_file.attach("res/images/unexpected_error.png")
         embed.set_thumbnail(url=url)
-     
-        view = discord.ui.View()
-        view.add_item(discord.ui.Button(label="Report", style=discord.ButtonStyle.red, custom_id="button_report"))
-        await self.reply(ctx, embed=embed, view=view, file=file)
+        await self.reply(ctx, embed=embed, file=file)
 
 
 async def setup(bot: KurdDX):
