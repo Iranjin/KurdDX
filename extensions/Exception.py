@@ -3,7 +3,8 @@ from typing import Union
 import discord
 from discord.ext import commands
 
-from utils import exceptions, local_file
+from utils import local_file
+from utils.exceptions import *
 from kurd_dx import KurdDX
 from base_cog import BaseCog
 
@@ -21,16 +22,16 @@ class Exception_EXT(BaseCog):
         if ctx.command is not None:
             ctx.command.reset_cooldown(ctx)
         
-        if isinstance(error, exceptions.KurdDXError): # KurdDXError (util/exceptions.py)
-            if isinstance(error.original, exceptions.ResourceNotFoundError):
+        if isinstance(error,KurdDXError): # KurdDXError (util/exceptions.py)
+            if isinstance(error.original,ResourceNotFoundError):
                 return await self.on_resource_not_found_error(ctx, error.original)
-            elif isinstance(error.original, exceptions.ExecutableNotFoundError):
+            elif isinstance(error.original,ExecutableNotFoundError):
                 return await self.on_executable_not_found_error(ctx, error.original)
-            elif isinstance(error.original, exceptions.MaintenanceError):
+            elif isinstance(error.original,MaintenanceError):
                 return await self.on_maintenance_error(ctx, error.original)
-            elif isinstance(error.original, exceptions.OutOfRangeError):
+            elif isinstance(error.original,OutOfRangeError):
                 return await self.on_out_of_range_error(ctx, error.original)
-            elif isinstance(error.original, exceptions.InvalidSubcommandError):
+            elif isinstance(error.original,InvalidSubcommandError):
                 return await self.on_invalid_subcommand_error(ctx, error.original)
             
         elif isinstance(error, commands.errors.HybridCommandError): # HybridCommandError
@@ -168,31 +169,27 @@ class Exception_EXT(BaseCog):
         embed.set_thumbnail(url=url)
         await self.reply(ctx, embed=embed, file=file)
     
-    async def on_resource_not_found_error(self, ctx: commands.Context, error: exceptions.ResourceNotFoundError):
+    async def on_resource_not_found_error(self, ctx: commands.Context, error:ResourceNotFoundError):
         embed = discord.Embed(
             title="Resource Not Found",
             description=str(error),
             color=discord.Color.teal()
         )
-        view = discord.ui.View()
-        view.add_item(discord.ui.Button(label="Report", style=discord.ButtonStyle.red, custom_id="button_report"))
         url, file = local_file.attach("res/images/error.png")
         embed.set_thumbnail(url=url)
         await self.reply(ctx, embed=embed, file=file)
     
-    async def on_executable_not_found_error(self, ctx: commands.Context, error: exceptions.ExecutableNotFoundError):
+    async def on_executable_not_found_error(self, ctx: commands.Context, error:ExecutableNotFoundError):
         embed = discord.Embed(
             title="Executable Not Found",
             description=str(error),
             color=discord.Color.teal()
         )
-        view = discord.ui.View()
-        view.add_item(discord.ui.Button(label="Report", style=discord.ButtonStyle.red, custom_id="button_report"))
         url, file = local_file.attach("res/images/error.png")
         embed.set_thumbnail(url=url)
         await self.reply(ctx, embed=embed, file=file)
     
-    async def on_maintenance_error(self, ctx: commands.Context, error: exceptions.MaintenanceError):
+    async def on_maintenance_error(self, ctx: commands.Context, error:MaintenanceError):
         embed = discord.Embed(
             title="Maintenance",
             description=str(error),
@@ -202,7 +199,7 @@ class Exception_EXT(BaseCog):
         embed.set_thumbnail(url=url)
         await self.reply(ctx, embed=embed, file=file)
     
-    async def on_out_of_range_error(self, ctx: commands.Context, error: exceptions.OutOfRangeError):
+    async def on_out_of_range_error(self, ctx: commands.Context, error:OutOfRangeError):
         embed = discord.Embed(
             title="Out of Range",
             description=str(error),
@@ -215,7 +212,7 @@ class Exception_EXT(BaseCog):
         embed.set_thumbnail(url=url)
         await self.reply(ctx, embed=embed, file=file)
     
-    async def on_invalid_subcommand_error(self, ctx: commands.Context, error: exceptions.InvalidSubcommandError):
+    async def on_invalid_subcommand_error(self, ctx: commands.Context, error:InvalidSubcommandError):
         if error.given_subcommand_name is None:
             description = f"{error.group.name} group must have a subcommand"
         else:
